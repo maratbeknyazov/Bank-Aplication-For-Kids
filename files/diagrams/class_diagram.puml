@@ -1,0 +1,361 @@
+@startuml ClassDiagram
+title Virtual Bank Application for Kids - Class Diagram\nGroup SE-24
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 11
+skinparam classBackgroundColor #EBF3FB
+skinparam classBorderColor #1F4E79
+skinparam classHeaderBackgroundColor #1F4E79
+skinparam classHeaderFontColor white
+skinparam arrowColor #1F4E79
+skinparam packageBackgroundColor #F5F9FF
+skinparam packageBorderColor #2E75B6
+skinparam noteFontSize 9
+
+' =================== MODEL LAYER ===================
+package "Model Layer" {
+
+    enum AccountType {
+        CURRENT
+        SAVINGS
+    }
+
+    enum TransactionType {
+        DEPOSIT
+        WITHDRAWAL
+        TASK_REWARD
+        SAVINGS_TRANSFER
+    }
+
+    enum TaskStatus {
+        PENDING
+        COMPLETED
+        APPROVED
+        REJECTED
+    }
+
+    class User {
+        - String userId
+        - String name
+        - int age
+        - String pinHash
+        - String role
+        + User(name: String, age: int, pin: String, role: String)
+        + getUserId(): String
+        + getName(): String
+        + getRole(): String
+        + verifyPin(pin: String): boolean
+        + setPin(newPin: String): void
+    }
+
+    class Account {
+        - String accountId
+        - String userId
+        - AccountType accountType
+        - double balance
+        - LocalDate createdDate
+        + Account(userId: String, type: AccountType)
+        + getAccountId(): String
+        + getBalance(): double
+        + deposit(amount: double): void
+        + withdraw(amount: double): boolean
+        + getAccountType(): AccountType
+    }
+
+    class Transaction {
+        - String transactionId
+        - String accountId
+        - TransactionType type
+        - double amount
+        - double balanceAfter
+        - String description
+        - LocalDateTime dateTime
+        + Transaction(accountId: String, type: TransactionType, amount: double, desc: String)
+        + getTransactionId(): String
+        + getAmount(): double
+        + getType(): TransactionType
+        + getDateTime(): LocalDateTime
+        + getDescription(): String
+        + getBalanceAfter(): double
+    }
+
+    class Task {
+        - String taskId
+        - String parentUserId
+        - String childUserId
+        - String title
+        - String description
+        - double rewardAmount
+        - LocalDate dueDate
+        - TaskStatus status
+        + Task(parentId: String, childId: String, title: String, reward: double)
+        + getTaskId(): String
+        + getTitle(): String
+        + getRewardAmount(): double
+        + getStatus(): TaskStatus
+        + setStatus(status: TaskStatus): void
+        + getDueDate(): LocalDate
+    }
+
+    class SavingsGoal {
+        - String goalId
+        - String accountId
+        - String goalName
+        - double targetAmount
+        - double savedAmount
+        - LocalDate targetDate
+        - boolean completed
+        + SavingsGoal(accountId: String, name: String, target: double)
+        + getGoalId(): String
+        + getGoalName(): String
+        + getTargetAmount(): double
+        + getSavedAmount(): double
+        + addToSavings(amount: double): void
+        + getProgressPercent(): double
+        + isCompleted(): boolean
+    }
+}
+
+' =================== SERVICE LAYER ===================
+package "Service Layer" {
+
+    class AuthService {
+        - UserStorage userStorage
+        - User currentUser
+        + AuthService(storage: UserStorage)
+        + login(name: String, pin: String, role: String): boolean
+        + logout(): void
+        + getCurrentUser(): User
+        + registerUser(name: String, age: int, pin: String, role: String): User
+        + changePin(userId: String, oldPin: String, newPin: String): boolean
+    }
+
+    class AccountService {
+        - AccountStorage accountStorage
+        - TransactionStorage transactionStorage
+        + AccountService(aStorage: AccountStorage, tStorage: TransactionStorage)
+        + createAccount(userId: String, type: AccountType): Account
+        + getAccount(accountId: String): Account
+        + getAccountsByUser(userId: String): List<Account>
+        + deposit(accountId: String, amount: double, desc: String): Transaction
+        + withdraw(accountId: String, amount: double): Transaction
+        + getTransactions(accountId: String): List<Transaction>
+    }
+
+    class TaskService {
+        - TaskStorage taskStorage
+        - AccountService accountService
+        + TaskService(storage: TaskStorage, accService: AccountService)
+        + createTask(parentId: String, childId: String, title: String, reward: double, due: LocalDate): Task
+        + getTasksForChild(childId: String): List<Task>
+        + getTasksForParent(parentId: String): List<Task>
+        + markComplete(taskId: String): void
+        + approveTask(taskId: String, accountId: String): void
+        + rejectTask(taskId: String): void
+    }
+
+    class SavingsGoalService {
+        - SavingsGoalStorage goalStorage
+        - AccountService accountService
+        + SavingsGoalService(storage: SavingsGoalStorage, accService: AccountService)
+        + createGoal(accountId: String, name: String, target: double, date: LocalDate): SavingsGoal
+        + addToGoal(goalId: String, amount: double, fromAccountId: String): void
+        + getGoalsByAccount(accountId: String): List<SavingsGoal>
+        + getCompletedGoals(accountId: String): List<SavingsGoal>
+    }
+}
+
+' =================== STORAGE LAYER ===================
+package "Storage Layer" {
+
+    interface Storage<T> {
+        + save(item: T): void
+        + findById(id: String): T
+        + findAll(): List<T>
+        + delete(id: String): void
+    }
+
+    class UserStorage {
+        - String filePath
+        + UserStorage(filePath: String)
+        + save(user: User): void
+        + findById(id: String): User
+        + findByName(name: String): User
+        + findAll(): List<User>
+        + delete(id: String): void
+        - readFromFile(): List<User>
+        - writeToFile(users: List<User>): void
+    }
+
+    class AccountStorage {
+        - String filePath
+        + AccountStorage(filePath: String)
+        + save(account: Account): void
+        + findById(id: String): Account
+        + findByUserId(userId: String): List<Account>
+        + findAll(): List<Account>
+        + delete(id: String): void
+    }
+
+    class TransactionStorage {
+        - String filePath
+        + TransactionStorage(filePath: String)
+        + save(transaction: Transaction): void
+        + findById(id: String): Transaction
+        + findByAccountId(accountId: String): List<Transaction>
+        + findAll(): List<Transaction>
+        + delete(id: String): void
+    }
+
+    class TaskStorage {
+        - String filePath
+        + TaskStorage(filePath: String)
+        + save(task: Task): void
+        + findById(id: String): Task
+        + findByChildId(childId: String): List<Task>
+        + findByParentId(parentId: String): List<Task>
+        + findAll(): List<Task>
+        + delete(id: String): void
+    }
+
+    class SavingsGoalStorage {
+        - String filePath
+        + SavingsGoalStorage(filePath: String)
+        + save(goal: SavingsGoal): void
+        + findById(id: String): SavingsGoal
+        + findByAccountId(accountId: String): List<SavingsGoal>
+        + findAll(): List<SavingsGoal>
+        + delete(id: String): void
+    }
+}
+
+' =================== UI LAYER ===================
+package "UI Layer (JavaFX)" {
+
+    class MainApp {
+        - Stage primaryStage
+        - AuthService authService
+        - AccountService accountService
+        - TaskService taskService
+        - SavingsGoalService goalService
+        + start(stage: Stage): void
+        + switchScene(fxml: String): void
+        + getAuthService(): AuthService
+        + getAccountService(): AccountService
+        + getTaskService(): TaskService
+        + getGoalService(): SavingsGoalService
+    }
+
+    class LoginController {
+        - AuthService authService
+        + handleChildLogin(): void
+        + handleParentLogin(): void
+        + handleLogin(): void
+        + showError(msg: String): void
+    }
+
+    class ChildDashboardController {
+        - AccountService accountService
+        - SavingsGoalService goalService
+        - TaskService taskService
+        + initialize(): void
+        + showBalance(): void
+        + handleWithdraw(): void
+        + handleViewTasks(): void
+        + handleViewGoals(): void
+        + handleViewHistory(): void
+        + handleLogout(): void
+    }
+
+    class ParentDashboardController {
+        - AccountService accountService
+        - TaskService taskService
+        + initialize(): void
+        + handleCreateAccount(): void
+        + handleDeposit(): void
+        + handleSetTask(): void
+        + handleApproveTasks(): void
+        + handleViewHistory(): void
+        + handleLogout(): void
+    }
+
+    class TransactionController {
+        - AccountService accountService
+        + initialize(): void
+        + loadTransactions(): void
+        + handleFilterAll(): void
+        + handleFilterDeposits(): void
+        + handleFilterWithdrawals(): void
+    }
+
+    class SavingsGoalController {
+        - SavingsGoalService goalService
+        - AccountService accountService
+        + initialize(): void
+        + loadGoals(): void
+        + handleAddGoal(): void
+        + handleAddMoney(goalId: String): void
+    }
+
+    class TaskController {
+        - TaskService taskService
+        + initialize(): void
+        + loadTasks(): void
+        + handleMarkDone(taskId: String): void
+        + handleApprove(taskId: String): void
+        + handleReject(taskId: String): void
+    }
+}
+
+' =================== RELATIONSHIPS ===================
+User "1" --> "1..*" Account : owns
+Account "1" --> "0..*" Transaction : records
+Account "1" --> "0..*" SavingsGoal : tracks
+User "1" --> "0..*" Task : creates/receives
+
+AuthService --> UserStorage : uses
+AccountService --> AccountStorage : uses
+AccountService --> TransactionStorage : uses
+TaskService --> TaskStorage : uses
+TaskService --> AccountService : uses
+SavingsGoalService --> SavingsGoalStorage : uses
+SavingsGoalService --> AccountService : uses
+
+UserStorage ..|> Storage : implements
+AccountStorage ..|> Storage : implements
+TransactionStorage ..|> Storage : implements
+TaskStorage ..|> Storage : implements
+SavingsGoalStorage ..|> Storage : implements
+
+MainApp --> AuthService : creates
+MainApp --> AccountService : creates
+MainApp --> TaskService : creates
+MainApp --> SavingsGoalService : creates
+
+LoginController --> AuthService : uses
+ChildDashboardController --> AccountService : uses
+ChildDashboardController --> SavingsGoalService : uses
+ChildDashboardController --> TaskService : uses
+ParentDashboardController --> AccountService : uses
+ParentDashboardController --> TaskService : uses
+TransactionController --> AccountService : uses
+SavingsGoalController --> SavingsGoalService : uses
+TaskController --> TaskService : uses
+
+Account --> AccountType : uses
+Transaction --> TransactionType : uses
+Task --> TaskStatus : uses
+
+note bottom of Storage
+  Generic interface implemented
+  by all storage classes.
+  Data persisted as JSON files.
+end note
+
+note right of MainApp
+  Entry point of JavaFX app.
+  Manages scene switching and
+  shared service instances.
+end note
+
+@enduml

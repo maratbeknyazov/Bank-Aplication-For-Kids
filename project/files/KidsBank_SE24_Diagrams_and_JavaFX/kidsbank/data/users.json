@@ -1,0 +1,29 @@
+[
+  {
+    "role": "child",
+    "pinHash": "fe2592b42a727e977f055947385b709cc82b16b9a87f88c6abf3900d65d0cdc3",
+    "name": "Jahongir",
+    "locked": false,
+    "userId": "ced1e27f-5d1b-4040-8ab1-2fcb561a94e4",
+    "age": 10,
+    "loginFailures": 0
+  },
+  {
+    "role": "parent",
+    "pinHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    "name": "Usmonjon",
+    "locked": false,
+    "userId": "7ed7850d-b9be-43ec-80f9-fccce8e53bed",
+    "age": 30,
+    "loginFailures": 0
+  },
+  {
+    "role": "child",
+    "pinHash": "fe2592b42a727e977f055947385b709cc82b16b9a87f88c6abf3900d65d0cdc3",
+    "name": "Albert",
+    "locked": false,
+    "userId": "b4eaa1eb-1508-4bfb-9f6b-c484213e2630",
+    "age": 9,
+    "loginFailures": 0
+  }
+]

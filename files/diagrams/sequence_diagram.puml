@@ -1,0 +1,140 @@
+@startuml SequenceDiagram
+title Virtual Bank for Kids — Sequence Diagrams\nGroup SE-24
+
+skinparam sequenceArrowColor #1F4E79
+skinparam sequenceLifeLineBorderColor #1F4E79
+skinparam sequenceParticipantBackgroundColor #EBF3FB
+skinparam sequenceParticipantBorderColor #1F4E79
+skinparam sequenceGroupBodyBackgroundColor #F5F9FF
+skinparam sequenceGroupBorderColor #2E75B6
+skinparam noteFontSize 9
+skinparam sequenceFontSize 10
+
+== Scenario 1: Child Login ==
+
+actor Child
+participant "LoginController\n(UI)" as LC
+participant "AuthService" as AS
+participant "UserStorage" as US
+database "users.json" as DB
+
+Child -> LC : Select "Child" role\nEnter PIN
+LC -> AS : login(name, pin, "child")
+AS -> US : findByName(name)
+US -> DB : read users.json
+DB --> US : user data
+US --> AS : User object
+AS -> AS : verifyPin(pin)
+
+alt PIN correct
+    AS --> LC : true (success)
+    LC -> LC : switchScene("ChildDashboard")
+    LC --> Child : Show Child Dashboard
+else PIN wrong
+    AS --> LC : false (failure)
+    LC --> Child : Show "Incorrect PIN"\n(attempt X of 3)
+    alt 3rd failure
+        LC --> Child : "Account locked.\nContact your parent."
+    end
+end
+
+|||
+
+== Scenario 2: Parent Deposits Money ==
+
+actor Parent
+participant "ParentDashboard\n(UI)" as PD
+participant "AccountService" as ACCS
+participant "AccountStorage" as ASTS
+participant "TransactionStorage" as TS
+database "accounts.json\ntransactions.json" as DB2
+
+Parent -> PD : Click "Deposit Money"
+PD -> PD : Show deposit form
+Parent -> PD : Enter amount + description
+PD -> PD : Validate input\n(amount > 0, numeric)
+
+alt Invalid input
+    PD --> Parent : Show inline error
+else Valid input
+    PD -> ACCS : deposit(accountId, amount, desc)
+    ACCS -> ASTS : findById(accountId)
+    ASTS -> DB2 : read accounts.json
+    DB2 --> ASTS : Account data
+    ASTS --> ACCS : Account object
+    ACCS -> ACCS : account.deposit(amount)
+    ACCS -> ASTS : save(updatedAccount)
+    ASTS -> DB2 : write accounts.json
+    ACCS -> TS : save(new Transaction)
+    TS -> DB2 : write transactions.json
+    ACCS --> PD : Transaction object
+    PD --> Parent : "Deposit successful!\nNew balance: $X"
+end
+
+|||
+
+== Scenario 3: Parent Approves Child Task ==
+
+actor Parent
+participant "TaskController\n(UI)" as TC
+participant "TaskService" as TSVC
+participant "TaskStorage" as TSTO
+participant "AccountService" as AS2
+database "tasks.json\naccounts.json" as DB3
+
+Parent -> TC : Click "Approve" on completed task
+TC -> TSVC : approveTask(taskId, accountId)
+TSVC -> TSTO : findById(taskId)
+TSTO -> DB3 : read tasks.json
+DB3 --> TSTO : Task data
+TSTO --> TSVC : Task object
+TSVC -> TSVC : task.setStatus(APPROVED)
+TSVC -> AS2 : deposit(accountId, task.rewardAmount, "Task Reward")
+AS2 --> TSVC : Transaction (success)
+TSVC -> TSTO : save(updatedTask)
+TSTO -> DB3 : write tasks.json
+TSVC --> TC : success
+TC --> Parent : "Task approved!\n$X added to child's balance"
+
+|||
+
+== Scenario 4: Child Sets Savings Goal & Adds Money ==
+
+actor Child2 as "Child"
+participant "GoalController\n(UI)" as GC
+participant "SavingsGoalService" as SGS
+participant "SavingsGoalStorage" as SGST
+participant "AccountService" as AS3
+database "goals.json\naccounts.json" as DB4
+
+Child2 -> GC : Click "+ Add New Goal"
+Child2 -> GC : Enter name, target, optional date
+GC -> SGS : createGoal(accountId, name, target, date)
+SGS -> SGST : save(new SavingsGoal)
+SGST -> DB4 : write goals.json
+SGS --> GC : SavingsGoal object
+GC --> Child2 : Show goal with 0% progress bar
+
+Child2 -> GC : Click "Add Money" on goal
+Child2 -> GC : Enter transfer amount
+GC -> AS3 : getBalance(accountId)
+AS3 --> GC : current balance
+
+alt amount > balance
+    GC --> Child2 : "Insufficient funds!"
+else amount valid
+    GC -> SGS : addToGoal(goalId, amount, accountId)
+    SGS -> AS3 : withdraw(accountId, amount)
+    AS3 --> SGS : success
+    SGS -> SGST : save(updatedGoal)
+    SGST -> DB4 : write goals.json
+    SGS --> GC : updated SavingsGoal
+
+    alt goal completed
+        GC --> Child2 : 🎉 "Congratulations!\nYou reached your goal!"
+    else goal in progress
+        GC --> Child2 : Show updated progress bar
+    end
+end
+
+@enduml

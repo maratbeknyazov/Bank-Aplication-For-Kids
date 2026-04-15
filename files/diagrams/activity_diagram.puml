@@ -1,0 +1,152 @@
+@startuml ActivityDiagram
+title Virtual Bank for Kids — Activity Diagram (Main Flows)\nGroup SE-24
+
+skinparam activityBackgroundColor #EBF3FB
+skinparam activityBorderColor #1F4E79
+skinparam activityFontSize 10
+skinparam arrowColor #1F4E79
+skinparam diamondBackgroundColor #FFFDE7
+skinparam diamondBorderColor #F57F17
+skinparam startColor #1F4E79
+skinparam endColor #C0392B
+skinparam swimlaneBorderColor #2E75B6
+skinparam swimlaneTitleFontSize 11
+
+|#EBF3FB| App |
+|#E8F5E9| Parent |
+|#FFF9C4| Child |
+
+start
+
+|App|
+:Launch Application;
+:Show Welcome / Login Screen;
+
+|App|
+:User selects role\n(Parent or Child);
+
+|App|
+:Prompt for PIN;
+:Verify PIN against stored hash;
+
+if (PIN correct?) then (yes)
+  if (Role = Parent?) then (yes)
+
+    |Parent|
+    :Show Parent Dashboard;
+    :Choose action;
+
+    fork
+      :Create Account;
+      |Parent|
+      :Enter child name, age,\nselect account type, set PIN;
+      :Save account to JSON file;
+      :Show confirmation;
+    fork again
+      :Deposit Money;
+      |Parent|
+      :Select account, enter amount;
+      if (Amount valid?) then (yes)
+        :Update balance in file;
+        :Log transaction;
+        :Show "Deposit successful";
+      else (no)
+        :Show error message;
+      endif
+    fork again
+      :Set Task;
+      |Parent|
+      :Enter task title, reward, due date;
+      :Save task to JSON file;
+      :Notify child (status update);
+    fork again
+      :Approve/Reject Tasks;
+      |Parent|
+      :View completed tasks;
+      if (Approve?) then (yes)
+        :Deposit reward to child balance;
+        :Mark task APPROVED;
+      else (no)
+        :Mark task REJECTED;
+      endif
+    end fork
+
+  else (no — Child)
+
+    |Child|
+    :Show Child Dashboard;
+    :View current balance;
+    :Choose action;
+
+    fork
+      :Withdraw Money;
+      |Child|
+      :Enter amount;
+      if (Sufficient balance?) then (yes)
+        :Deduct from balance;
+        :Log transaction;
+        :Show updated balance;
+      else (no)
+        :Show "Insufficient funds";
+      endif
+    fork again
+      :View My Tasks;
+      |Child|
+      :See pending tasks;
+      :Mark task as complete;
+      :Wait for parent approval;
+      if (Approved?) then (yes)
+        :Reward added to balance;
+      else (no)
+        :Task marked rejected;
+      endif
+    fork again
+      :Savings Goals;
+      |Child|
+      if (Add new goal?) then (yes)
+        :Enter goal name and target;
+        :Save goal to JSON file;
+      else (no)
+        :Select existing goal;
+        :Enter transfer amount;
+        if (Sufficient balance?) then (yes)
+          :Transfer to goal;
+          if (Goal complete?) then (yes)
+            :Show celebration!;
+          else (no)
+            :Show updated progress bar;
+          endif
+        else (no)
+          :Show error;
+        endif
+      endif
+    fork again
+      :View Transaction History;
+      |Child|
+      :Load transactions from file;
+      :Filter by type (optional);
+      :Display sorted list;
+    end fork
+
+  endif
+
+else (no — wrong PIN)
+  |App|
+  :Increment failure counter;
+  if (3 failures?) then (yes)
+    :Lock account;
+    :Show "Contact parent";
+  else (no)
+    :Show "Incorrect PIN\n(X attempts left)";
+    :Return to PIN entry;
+  endif
+endif
+
+|App|
+:User clicks Logout;
+:Clear session;
+:Return to Welcome Screen;
+
+stop
+
+@enduml

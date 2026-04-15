@@ -1,0 +1,20 @@
+[
+  {
+    "dateTime": "2026-04-13T11:32:21.004522513",
+    "accountId": "c2b84284-c658-4bc4-abe9-6975f3c298c0",
+    "amount": 10,
+    "description": "Task Reward: Soz yodla",
+    "balanceAfter": 10,
+    "type": "TASK_REWARD",
+    "transactionId": "f41bb734-198c-45f5-8dee-8249bdbddaf0"
+  },
+  {
+    "dateTime": "2026-04-13T11:32:39.454093380",
+    "accountId": "c2b84284-c658-4bc4-abe9-6975f3c298c0",
+    "amount": 5,
+    "description": "Withdrawal",
+    "balanceAfter": 5,
+    "type": "WITHDRAWAL",
+    "transactionId": "3ad47db1-2cce-44fe-b46d-65b9b3130ea9"
+  }
+]

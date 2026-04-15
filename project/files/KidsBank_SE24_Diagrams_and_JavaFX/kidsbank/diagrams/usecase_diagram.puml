@@ -1,0 +1,90 @@
+@startuml UseCaseDiagram
+title Virtual Bank for Kids — Use Case Diagram\nGroup SE-24
+
+skinparam actorBackgroundColor #EBF3FB
+skinparam actorBorderColor #1F4E79
+skinparam usecaseBackgroundColor #FFFDE7
+skinparam usecaseBorderColor #F57F17
+skinparam rectangleBackgroundColor #F5F9FF
+skinparam rectangleBorderColor #1F4E79
+skinparam arrowColor #1F4E79
+skinparam usecaseFontSize 10
+skinparam actorFontSize 11
+
+left to right direction
+
+actor "Child" as Child #EBF3FB
+actor "Parent" as Parent #E8F5E9
+
+rectangle "Virtual Bank Application for Kids" {
+
+    ' --- Auth ---
+    usecase "UC01\nLogin with PIN" as UC01
+    usecase "UC02\nLogout" as UC02
+
+    ' --- Account ---
+    usecase "UC03\nCreate Child Account" as UC03
+    usecase "UC04\nView Balance" as UC04
+    usecase "UC05\nSelect Account Type" as UC05
+
+    ' --- Money ---
+    usecase "UC06\nDeposit Money" as UC06
+    usecase "UC07\nWithdraw Money" as UC07
+    usecase "UC08\nView Transaction History" as UC08
+    usecase "UC09\nFilter Transactions" as UC09
+
+    ' --- Tasks ---
+    usecase "UC10\nCreate Task" as UC10
+    usecase "UC11\nView Tasks" as UC11
+    usecase "UC12\nMark Task Complete" as UC12
+    usecase "UC13\nApprove Task" as UC13
+    usecase "UC14\nReject Task" as UC14
+    usecase "UC15\nReceive Task Reward" as UC15
+
+    ' --- Goals ---
+    usecase "UC16\nCreate Savings Goal" as UC16
+    usecase "UC17\nTrack Goal Progress" as UC17
+    usecase "UC18\nAdd Money to Goal" as UC18
+
+    ' --- Admin ---
+    usecase "UC19\nReset Child PIN" as UC19
+    usecase "UC20\nExport Monthly Summary" as UC20
+}
+
+' Child connections
+Child --> UC01
+Child --> UC02
+Child --> UC04
+Child --> UC07
+Child --> UC08
+Child --> UC11
+Child --> UC12
+Child --> UC16
+Child --> UC17
+Child --> UC18
+
+' Parent connections
+Parent --> UC01
+Parent --> UC02
+Parent --> UC03
+Parent --> UC05
+Parent --> UC06
+Parent --> UC08
+Parent --> UC10
+Parent --> UC11
+Parent --> UC13
+Parent --> UC14
+Parent --> UC19
+Parent --> UC20
+
+' include / extend
+UC08 ..> UC09 : <<extend>>
+UC03 ..> UC05 : <<include>>
+UC13 ..> UC15 : <<include>>
+UC07 ..> UC04 : <<include>>
+UC18 ..> UC07 : <<include>>
+
+note "All data stored\nlocally as JSON files.\nNo internet required." as N1
+note "PIN verified on\nevery login.\nLockout after 3 fails." as N2
+
+@enduml
