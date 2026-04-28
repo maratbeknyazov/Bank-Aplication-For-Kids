@@ -10,11 +10,20 @@
   },
   {
     "role": "parent",
-    "pinHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-    "name": "Usmonjon",
+    "pinHash": "f8638b979b2f4f793ddb6dbd197e0ee25a7a6ea32b0ae22f5e3c5d119d839e75",
+    "name": "Alice",
     "locked": false,
-    "userId": "7ed7850d-b9be-43ec-80f9-fccce8e53bed",
-    "age": 30,
+    "userId": "192b72d3-4999-4838-b3ea-65d55f8e61bb",
+    "age": 35,
+    "loginFailures": 0
+  },
+  {
+    "role": "child",
+    "pinHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    "name": "Emma",
+    "locked": false,
+    "userId": "3cd78195-490b-4991-915b-892cdb6d3662",
+    "age": 10,
     "loginFailures": 0
   },
   {
@@ -24,6 +33,15 @@
     "locked": false,
     "userId": "b4eaa1eb-1508-4bfb-9f6b-c484213e2630",
     "age": 9,
+    "loginFailures": 0
+  },
+  {
+    "role": "parent",
+    "pinHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+    "name": "Usmonjon",
+    "locked": false,
+    "userId": "7ed7850d-b9be-43ec-80f9-fccce8e53bed",
+    "age": 30,
     "loginFailures": 0
   }
 ]

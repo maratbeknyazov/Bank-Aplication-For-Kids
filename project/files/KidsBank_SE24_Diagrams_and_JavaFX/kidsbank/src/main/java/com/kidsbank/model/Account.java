@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * Represents a bank account (Current or Savings) belonging to a child.
+ * STAGE 1: Model — data structure for accounts.
+ * Stores: balance, type, userId. Basic deposit/withdraw methods.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class Account {

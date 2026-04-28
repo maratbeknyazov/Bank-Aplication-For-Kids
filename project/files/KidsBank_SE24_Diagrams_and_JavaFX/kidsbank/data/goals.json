@@ -1,0 +1,20 @@
+[
+  {
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "goalId": "fd728ebf-7793-48fa-8113-5305998bdad2",
+    "targetAmount": 100,
+    "targetDate": "",
+    "goalName": "New Bike",
+    "completed": false,
+    "savedAmount": 20
+  },
+  {
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "goalId": "09a5353c-e6ec-4edc-86c5-eccc2138ba5d",
+    "targetAmount": 10,
+    "targetDate": "",
+    "goalName": "SmallGoal",
+    "completed": true,
+    "savedAmount": 10
+  }
+]

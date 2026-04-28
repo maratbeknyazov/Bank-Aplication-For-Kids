@@ -14,7 +14,8 @@ import javafx.scene.text.*;
 import java.util.List;
 
 /**
- * Login / Welcome screen. Users select role and enter PIN.
+ * STAGE 5.1: UI — Login screen (build first among screens).
+ * Calls AuthService.login(), routes to dashboards.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class LoginScreen {

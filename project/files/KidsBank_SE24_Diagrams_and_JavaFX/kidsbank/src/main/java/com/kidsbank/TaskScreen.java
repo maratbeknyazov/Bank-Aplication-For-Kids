@@ -12,7 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Task management screen — shows different views for parent vs child.
+ * STAGE 5.4: UI — task list screen for parent/child.
+ * Parent creates tasks, child views and completes them.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class TaskScreen {

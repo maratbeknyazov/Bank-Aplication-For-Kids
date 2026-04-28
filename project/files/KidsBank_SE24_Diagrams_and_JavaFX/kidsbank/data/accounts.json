@@ -12,5 +12,12 @@
     "balance": 5,
     "accountType": "CURRENT",
     "userId": "b4eaa1eb-1508-4bfb-9f6b-c484213e2630"
+  },
+  {
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "createdDate": "2026-04-15",
+    "balance": 295,
+    "accountType": "CURRENT",
+    "userId": "3cd78195-490b-4991-915b-892cdb6d3662"
   }
 ]

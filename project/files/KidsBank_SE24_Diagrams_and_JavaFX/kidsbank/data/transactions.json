@@ -16,5 +16,68 @@
     "balanceAfter": 5,
     "type": "WITHDRAWAL",
     "transactionId": "3ad47db1-2cce-44fe-b46d-65b9b3130ea9"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.002645400",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 50,
+    "description": "Test deposit",
+    "balanceAfter": 50,
+    "type": "DEPOSIT",
+    "transactionId": "e86461d2-8d13-41e5-bde9-5b02d9371edb"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.016632300",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 100,
+    "description": "Setup",
+    "balanceAfter": 150,
+    "type": "DEPOSIT",
+    "transactionId": "14c07742-fc97-4b68-91eb-1ace8115ba0e"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.020835300",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 30,
+    "description": "Withdrawal",
+    "balanceAfter": 120,
+    "type": "WITHDRAWAL",
+    "transactionId": "abfbb42f-3b60-463d-aead-0338964eea1b"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.085945200",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 5,
+    "description": "Task Reward: Wash dishes",
+    "balanceAfter": 125,
+    "type": "TASK_REWARD",
+    "transactionId": "14cd6b12-e062-426c-a248-1d81633abab4"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.111573200",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 20,
+    "description": "Savings: New Bike",
+    "balanceAfter": 105,
+    "type": "SAVINGS_TRANSFER",
+    "transactionId": "25f773c5-93b3-4dea-8906-678f0d8364e5"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.121901100",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 200,
+    "description": "Test setup",
+    "balanceAfter": 305,
+    "type": "DEPOSIT",
+    "transactionId": "00d474a5-61db-4dfe-b938-22b7c890e96e"
+  },
+  {
+    "dateTime": "2026-04-15T16:18:19.128271500",
+    "accountId": "c8eab599-47c1-42e1-9ad6-de120407b3de",
+    "amount": 10,
+    "description": "Savings: SmallGoal",
+    "balanceAfter": 295,
+    "type": "SAVINGS_TRANSFER",
+    "transactionId": "4e74dd4c-5394-4c06-88db-a92e2cf0efed"
   }
 ]

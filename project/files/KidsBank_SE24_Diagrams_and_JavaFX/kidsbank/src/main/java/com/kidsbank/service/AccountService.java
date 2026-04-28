@@ -4,10 +4,10 @@ import com.kidsbank.model.*;
 import com.kidsbank.storage.JsonStorage;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Business logic for accounts, deposits, withdrawals, and transaction history.
+ * STAGE 3.2: Service — deposit/withdraw/transfer logic.
+ * Modifies Account balance, saves via Storage, creates Transactions.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class AccountService {

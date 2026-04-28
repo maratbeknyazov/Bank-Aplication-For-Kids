@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Screen displaying transaction history with filter options.
+ * STAGE 5.6: UI — transaction history screen.
+ * Displays list of deposits/withdrawals with filters.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class TransactionScreen {

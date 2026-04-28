@@ -1,6 +1,10 @@
 package com.kidsbank.model;
 
-/** Types of financial transactions. Group SE-24 */
+/**
+ * STAGE 1: Model — enum for transaction types.
+ * Values: DEPOSIT, WITHDRAWAL, TASK_REWARD, SAVINGS_TRANSFER.
+ * Group SE-24
+ */
 public enum TransactionType {
     DEPOSIT("Deposit"),
     WITHDRAWAL("Withdrawal"),

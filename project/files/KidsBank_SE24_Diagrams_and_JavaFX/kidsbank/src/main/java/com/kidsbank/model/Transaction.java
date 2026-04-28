@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * Records a single financial transaction on an account.
+ * STAGE 1: Model — data structure for transaction records.
+ * Stores: type, amount, timestamp, balance after transaction.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class Transaction {

@@ -1,10 +1,32 @@
-[{
-  "childUserId": "b4eaa1eb-1508-4bfb-9f6b-c484213e2630",
-  "dueDate": "2026-04-20",
-  "parentUserId": "7ed7850d-b9be-43ec-80f9-fccce8e53bed",
-  "description": "100 ta",
-  "rewardAmount": 10,
-  "title": "Soz yodla",
-  "taskId": "06161f4a-790e-4634-8d9e-ecf549e8d5cb",
-  "status": "APPROVED"
-}]
+[
+  {
+    "childUserId": "b4eaa1eb-1508-4bfb-9f6b-c484213e2630",
+    "dueDate": "2026-04-20",
+    "parentUserId": "7ed7850d-b9be-43ec-80f9-fccce8e53bed",
+    "description": "100 ta",
+    "rewardAmount": 10,
+    "title": "Soz yodla",
+    "taskId": "06161f4a-790e-4634-8d9e-ecf549e8d5cb",
+    "status": "APPROVED"
+  },
+  {
+    "childUserId": "3cd78195-490b-4991-915b-892cdb6d3662",
+    "dueDate": "2026-04-16",
+    "parentUserId": "192b72d3-4999-4838-b3ea-65d55f8e61bb",
+    "description": "Clean all dishes",
+    "rewardAmount": 5,
+    "title": "Wash dishes",
+    "taskId": "d9694a5c-d05c-4c44-9241-214f55e35899",
+    "status": "APPROVED"
+  },
+  {
+    "childUserId": "b4eaa1eb-1508-4bfb-9f6b-c484213e2630",
+    "dueDate": "2026-05-10",
+    "parentUserId": "7ed7850d-b9be-43ec-80f9-fccce8e53bed",
+    "description": "rewrite a project",
+    "rewardAmount": 1000,
+    "title": "project",
+    "taskId": "61abfaba-f9fa-481e-9da6-d23a15631c3b",
+    "status": "PENDING"
+  }
+]

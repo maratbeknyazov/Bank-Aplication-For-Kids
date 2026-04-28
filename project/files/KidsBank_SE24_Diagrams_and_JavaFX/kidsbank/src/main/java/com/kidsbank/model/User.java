@@ -5,7 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
- * Represents a user (Child or Parent) in the KidsBank system.
+ * STAGE 1: Model — data structure for users (child/parent).
+ * Stores: name, age, PIN hash, role. No business logic.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class User {

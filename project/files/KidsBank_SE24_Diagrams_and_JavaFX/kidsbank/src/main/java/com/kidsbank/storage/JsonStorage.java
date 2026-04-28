@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * Handles all JSON file read/write operations for persistence.
- * All data is stored in plain JSON files in the /data directory.
+ * STAGE 2: Storage — reads/writes JSON files in /data directory.
+ * Uses org.json library to serialize Model objects to disk.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class JsonStorage {

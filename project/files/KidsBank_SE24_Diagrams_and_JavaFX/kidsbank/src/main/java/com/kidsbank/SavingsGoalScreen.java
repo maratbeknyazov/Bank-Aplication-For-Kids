@@ -13,7 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Screen for viewing and managing savings goals.
+ * STAGE 5.5: UI — savings goals screen.
+ * Shows progress bars, allows adding money to goals.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class SavingsGoalScreen {

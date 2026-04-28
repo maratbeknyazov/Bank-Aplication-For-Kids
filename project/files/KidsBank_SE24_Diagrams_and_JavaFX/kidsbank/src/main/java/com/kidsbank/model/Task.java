@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * Represents a task created by a parent for a child to complete and earn money.
+ * STAGE 1: Model — data structure for tasks.
+ * Stores: title, reward, status, due date. No execution logic.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class Task {

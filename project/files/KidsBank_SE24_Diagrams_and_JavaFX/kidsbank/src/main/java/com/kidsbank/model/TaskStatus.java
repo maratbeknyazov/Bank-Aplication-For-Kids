@@ -1,6 +1,10 @@
 package com.kidsbank.model;
 
-/** Status of a task assigned by parent. Group SE-24 */
+/**
+ * STAGE 1: Model — enum for task status.
+ * Values: PENDING, COMPLETED, APPROVED, REJECTED.
+ * Group SE-24
+ */
 public enum TaskStatus {
     PENDING, COMPLETED, APPROVED, REJECTED
 }

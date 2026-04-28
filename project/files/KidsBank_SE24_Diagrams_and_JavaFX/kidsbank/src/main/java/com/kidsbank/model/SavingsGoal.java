@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 /**
- * Represents a savings goal set by a child.
+ * STAGE 1: Model — data structure for savings goals.
+ * Stores: target amount, saved amount, completion status.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class SavingsGoal {

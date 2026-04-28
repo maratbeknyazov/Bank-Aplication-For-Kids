@@ -11,7 +11,8 @@ import javafx.scene.text.*;
 import java.util.List;
 
 /**
- * Main dashboard shown to logged-in children.
+ * STAGE 5.3: UI — Child dashboard (build after login).
+ * Shows balance, tasks, goals, transaction history.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class ChildDashboardScreen {
@@ -116,7 +117,6 @@ public class ChildDashboardScreen {
         grid.setAlignment(Pos.CENTER);
 
         final String accId = account != null ? account.getAccountId() : null;
-        final String uid   = user.getUserId();
 
         Button withdrawBtn = actionBtn("💸 Withdraw", "#C0392B");
         Button tasksBtn    = actionBtn("📋 My Tasks",  "#1A5276");

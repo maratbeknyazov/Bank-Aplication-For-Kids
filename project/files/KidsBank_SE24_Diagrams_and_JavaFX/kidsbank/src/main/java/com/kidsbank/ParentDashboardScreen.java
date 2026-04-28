@@ -11,7 +11,8 @@ import javafx.scene.text.*;
 import java.util.List;
 
 /**
- * Main dashboard shown to logged-in parents.
+ * STAGE 5.2: UI — Parent dashboard (build after login).
+ * Shows children, creates tasks, deposits money.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class ParentDashboardScreen {

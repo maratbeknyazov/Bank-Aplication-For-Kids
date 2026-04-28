@@ -5,10 +5,10 @@ import com.kidsbank.storage.JsonStorage;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
- * Business logic for task management.
+ * STAGE 3.3: Service — task creation, completion, reward payout.
+ * Coordinates Task status changes and AccountService deposits.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class TaskService {

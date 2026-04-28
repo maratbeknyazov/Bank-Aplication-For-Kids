@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Business logic for savings goals.
+ * STAGE 3.4: Service — savings goal creation, progress tracking.
+ * Coordinates goal status and AccountService balance deductions.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class SavingsGoalService {

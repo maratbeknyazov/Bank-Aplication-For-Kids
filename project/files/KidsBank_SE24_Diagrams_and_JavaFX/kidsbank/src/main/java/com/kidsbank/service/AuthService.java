@@ -6,7 +6,8 @@ import com.kidsbank.storage.JsonStorage;
 import java.util.Optional;
 
 /**
- * Handles authentication: login, logout, registration, PIN management.
+ * STAGE 3.1: Service — login/logout logic, PIN verification.
+ * Uses Storage to load users, validates credentials.
  * Group SE-24 - Virtual Bank for Kids
  */
 public class AuthService {

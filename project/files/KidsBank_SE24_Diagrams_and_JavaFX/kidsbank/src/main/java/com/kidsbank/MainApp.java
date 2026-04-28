@@ -2,17 +2,15 @@ package com.kidsbank;
 
 import com.kidsbank.service.*;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
 /**
- * Main JavaFX Application entry point for Virtual Bank for Kids.
+ * STAGE 5: UI — JavaFX entry point, initializes screens.
+ * Build this LAST after Model/Storage/Service/Tests work.
  * Group SE-24 - Agile Software Development
  */
 public class MainApp extends Application {

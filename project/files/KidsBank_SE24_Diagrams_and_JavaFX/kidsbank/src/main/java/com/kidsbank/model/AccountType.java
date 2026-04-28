@@ -1,7 +1,8 @@
 package com.kidsbank.model;
 
 /**
- * Enum representing the type of bank account.
+ * STAGE 1: Model — enum for account types.
+ * Values: CURRENT, SAVINGS.
  * Group SE-24 - Virtual Bank for Kids
  */
 public enum AccountType {
