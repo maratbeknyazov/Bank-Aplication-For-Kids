@@ -1,0 +1,19 @@
+# IDE files
+.idea
+*.iml
+*.iws
+*.ipr
+
+# Maven build output
+target/
+*/target/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
